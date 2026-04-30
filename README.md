@@ -11,20 +11,31 @@ Tools and curated datasets for analyzing redundancy structure in multi-benchmark
 
 ## Repository layout
 
-```
 .
 ├── README.md             This file
-├── LICENSE               MIT for code, CC-BY-4.0 for data
-├── Makefile              One-shot reproduction (`make all`)
+├── DATASHEET.md          Datasheet for both score-matrix datasets
+├── LICENSE               MIT for code
+├── Makefile              One-shot reproduction (`make all`, `make bootstrap`)
+│
 ├── code/                 Python scripts and dependencies
 │   ├── requirements.txt
-│   ├── hf_*.py           HF Open LLM analyses
-│   ├── livebench_*.py    LiveBench analyses
+│   ├── hf_.py           HF Open LLM analyses
+│   ├── livebench_.py    LiveBench analyses
 │   ├── parse_livebench.py
+│   ├── extract_metadata.py
 │   └── make_figures.py
-├── data/                 Score matrices and analysis outputs (CSV)
+│
+├── data/                 Score matrices and analysis outputs
+│   ├── DATA_LICENSE.md   CC-BY-4.0 license for the data
+│   ├── score_matrix.csv  HF Open LLM v2 (4486 × 7)
+│   ├── score_matrix_croissant.json       Croissant 1.0 metadata
+│   ├── livebench_scores.csv  LiveBench (49 × 7)
+│   ├── livebench_scores_croissant.json   Croissant 1.0 metadata
+│   ├── model_metadata.csv  (heuristic, regenerable)
+│   ├── livebench_imputation_full.csv
+│   └── livebench_bootstrap_tau.csv
+│
 └── figures/              Paper figures (PDF + PNG)
-```
 
 ## Quick start
 
