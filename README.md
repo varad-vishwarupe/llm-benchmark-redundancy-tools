@@ -10,7 +10,9 @@ Tools and curated datasets for analyzing redundancy structure in multi-benchmark
 - **All paper figures** — both as PDF (vector) and PNG (raster).
 
 ## Repository layout
+## Repository layout
 
+```
 .
 ├── README.md             This file
 ├── DATASHEET.md          Datasheet for both score-matrix datasets
@@ -19,8 +21,8 @@ Tools and curated datasets for analyzing redundancy structure in multi-benchmark
 │
 ├── code/                 Python scripts and dependencies
 │   ├── requirements.txt
-│   ├── hf_.py           HF Open LLM analyses
-│   ├── livebench_.py    LiveBench analyses
+│   ├── hf_*.py           HF Open LLM analyses
+│   ├── livebench_*.py    LiveBench analyses
 │   ├── parse_livebench.py
 │   ├── extract_metadata.py
 │   └── make_figures.py
@@ -36,6 +38,7 @@ Tools and curated datasets for analyzing redundancy structure in multi-benchmark
 │   └── livebench_bootstrap_tau.csv
 │
 └── figures/              Paper figures (PDF + PNG)
+```
 
 ## Quick start
 
