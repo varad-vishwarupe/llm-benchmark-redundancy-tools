@@ -1,0 +1,200 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "livebench-score-matrix-snapshot",
+  "description": "A 49 x 7 score matrix transcribed verbatim from Table 3 of White et al. (LiveBench: A Challenging, Contamination-Free LLM Benchmark, ICLR 2025 Spotlight, arXiv:2406.19314). Columns: model identifier, Coding, Data Analysis, Instruction Following, Language, Math, Reasoning. Original 0-100 scores rescaled to [0,1] for consistency with the companion HF snapshot. Used as a contamination-controlled replication of the redundancy analysis in the accompanying paper.",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "url": "https://anonymous.4open.science/r/llm-benchmark-redundancy-tools-5979/",
+  "version": "1.0.0",
+  "datePublished": "2026-04-30",
+  "keywords": [
+    "LLM evaluation",
+    "LiveBench",
+    "contamination-controlled benchmarks",
+    "leaderboard redundancy",
+    "minimal sufficient benchmarks"
+  ],
+  "creator": {
+    "@type": "Organization",
+    "name": "Anonymous Authors"
+  },
+  "citeAs": "Anonymous Authors. Minimal Sufficient Benchmarks: Score Imputation for Cost-Efficient LLM Leaderboards. NeurIPS 2026 Evaluations and Datasets Track (under review). Source data: White, C. et al., LiveBench, ICLR 2025, arXiv:2406.19314.",
+  "rai:dataCollection": "Manually transcribed from Table 3 of White et al. (arXiv:2406.19314, ICLR 2025 Spotlight). Transcription chosen over scraping the live leaderboard to make the replication exactly reproducible from a single citation. The 0-100 scores in the source are rescaled to [0,1].",
+  "rai:dataPreprocessingProtocol": "Sole preprocessing is the rescale from [0,100] to [0,1] (divide by 100). No models excluded; the 49-model snapshot is taken in full from the published table.",
+  "rai:dataAnnotationProtocol": "No human annotation. Scores are deterministic outputs of running LiveBench's contamination-controlled benchmarks against models, as published by the LiveBench maintainers in their ICLR 2025 paper.",
+  "rai:dataUseCases": "Cross-leaderboard replication of redundancy analyses; contamination-controlled comparison to open-leaderboard data; meta-evaluation research on whether redundancy structure depends on contamination control.",
+  "rai:dataLimitation": "(1) Small sample (n=49) leads to wide bootstrap CIs on individual subset orderings. The global pattern (instruction-following-inclusive subsets dominate) is robust across resamples; specific subset orderings between adjacent ranks are not. (2) The 49 models are a snapshot; the live LiveBench leaderboard updates continuously. (3) Six-category scope shared with the HF snapshot, so cross-leaderboard generalization beyond d=6 is unaddressed.",
+  "rai:dataReleaseMaintenancePlan": "The transcription is anchored to the published ICLR 2025 Table 3 and is not auto-refreshed; future work would re-transcribe from a newer LiveBench publication or partner directly with LiveBench maintainers for a live API integration.",
+  "rai:dataSocialImpact": "Enables cross-leaderboard replication of redundancy claims, strengthening the evidence base for compute-efficient evaluation. The contamination-controlled framing addresses a common skepticism about redundancy findings on open leaderboards.",
+  "rai:personalSensitiveInformation": "None. The dataset contains no personal or sensitive information.",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "livebench-csv",
+      "name": "livebench_scores.csv",
+      "description": "LiveBench score matrix: 49 rows, 7 columns (model identifier + 6 category scores).",
+      "contentUrl": "https://anonymous.4open.science/r/llm-benchmark-redundancy-tools-5979/data/livebench_scores.csv",
+      "encodingFormat": "text/csv",
+      "sha256": "584023ad643ebb44681755653236c33adc1a99d8ff494640536e21757aa1a397"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "livebench-records",
+      "name": "livebench-records",
+      "description": "One record per model with its identifier and six LiveBench category scores.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "lb-model",
+          "name": "model",
+          "description": "Model identifier as reported by White et al. (e.g., 'gpt-4o-2024-08-06', 'claude-3-5-sonnet').",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "livebench-csv"
+            },
+            "extract": {
+              "column": "model"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "lb-coding",
+          "name": "coding",
+          "description": "LiveBench Coding category score in [0,1].",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "livebench-csv"
+            },
+            "extract": {
+              "column": "coding"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "lb-da",
+          "name": "data_analysis",
+          "description": "LiveBench Data Analysis category score in [0,1].",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "livebench-csv"
+            },
+            "extract": {
+              "column": "data_analysis"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "lb-if",
+          "name": "instruction_following",
+          "description": "LiveBench Instruction Following category score in [0,1].",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "livebench-csv"
+            },
+            "extract": {
+              "column": "instruction_following"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "lb-lang",
+          "name": "language",
+          "description": "LiveBench Language category score in [0,1].",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "livebench-csv"
+            },
+            "extract": {
+              "column": "language"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "lb-math",
+          "name": "math",
+          "description": "LiveBench Math category score in [0,1].",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "livebench-csv"
+            },
+            "extract": {
+              "column": "math"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "lb-reasoning",
+          "name": "reasoning",
+          "description": "LiveBench Reasoning category score in [0,1].",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "livebench-csv"
+            },
+            "extract": {
+              "column": "reasoning"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
