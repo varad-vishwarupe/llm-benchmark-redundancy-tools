@@ -13,7 +13,7 @@ Tools and curated datasets for analyzing redundancy structure in multi-benchmark
 ## Repository layout
 
 ```
-.
+
 ├── README.md             This file
 ├── DATASHEET.md          Datasheet for both score-matrix datasets
 ├── LICENSE               MIT for code
